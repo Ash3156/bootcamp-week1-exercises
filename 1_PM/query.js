@@ -101,12 +101,35 @@ dont hard code solutions. */
 
 // Implement the function usersByPet to return a list of user objects filtered by cat or dog.
 const usersByPet = pet => {
+  let list = []
+  const arr = database.users
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].favPet == pet) {
+      list.push(arr[i])
+    }
+  }
+  return list
 }
 console.log(usersByPet('dog'))
 console.log(usersByPet('cat'))
 
 // Implement the function collegeLookup to return the name and color of a user's college.
 const collegeLookup = user => {
+  const arr = database.users
+  const arr2 = database.college
+  let answer = []
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].firstName == user) {
+      const IDcollege = arr[i].collegeId
+      for (let j = 0; j < arr2.length; j++) {
+        if (arr2[j].id == IDcollege) {
+          answer.push(arr2[j].name)
+          answer.push(arr2[j].color)
+          return answer
+        }
+      }
+    }
+  }
 }
 console.log(collegeLookup('Charles'))
 console.log(collegeLookup('Daniela'))
